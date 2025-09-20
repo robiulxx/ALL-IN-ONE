@@ -19,7 +19,7 @@ def register(bot, custom_command_handler, command_prefixes_list):
             "<code>/gemini</code> or <code>.gemini</code> — Talk to Gemini\n\n"
             "<code>/gpt</code> or <code>.gpt</code> — Talk to GPT\n\n"
             "<code>/say</code> or <code>.say</code> — Text to speech\n\n"
-            "<code>/spam</code> or <code>.spam</code> — spam text or imprase ut gf using <code>/spmtxt i love u 1000</code>\n"
+            "<code>/spam</code> or <code>.spam</code> — spam text or imprase ut gf using <code>/spmtxt i love u 1000</code>\n\n"
             "<code>/translate</code> or <code>.translate</code> — Translate texts\n\n"
             "<code>/info</code> or <code>.info</code> — Get Telegram user/bot/group/channel info\n\n"
             "<code>/iban</code> or <code>.iban</code> — generate Iban using 1. germeny - de 2. united kingdom - gb 3. netherlands - nl \n\n"
