@@ -1,0 +1,17 @@
+aiofiles
+aiohttp
+Babel
+FakeXYZ
+flask
+google-generativeai
+gtts
+langdetect
+moviepy
+pycountry
+pyrogram
+pyTelegramBotAPI
+python-telegram-bot
+pytz
+requests
+tgcrypto
+yt-dlp
