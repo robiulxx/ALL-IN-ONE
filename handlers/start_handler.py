@@ -11,7 +11,7 @@ def register(bot, custom_command_handler, command_prefixes_list):
 
             "<code>/arise</code> or <code>.arise</code> — Start the bot\n\n"
             "<code>/gen</code> or <code>.gen</code> — Generate random cards with BIN info\n\n"
-            "<code>/chk</code> or <code>.chk</code> — Check a single card's status\n"
+            "<code>/chk</code> or <code>.chk</code> — Check a single card's status\n\n"
             "<code>/mas</code> or <code>.mas</code> — Check all generated cards at once (reply to a list)\n\n"
             "<code>/fake</code> or <code>.fake</code> — Get fake address\n\n"
             "<code>/country</code> or <code>.country</code> — Check available countries\n\n"
