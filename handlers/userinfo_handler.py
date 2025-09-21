@@ -281,8 +281,9 @@ def setup_info_handler(app):
         await client.send_message(message.chat.id, START_MESSAGE, parse_mode=ParseMode.HTML, disable_web_page_preview=True, reply_markup=InlineKeyboardMarkup(buttons))
 
 app = Client("userinfo_handler", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
-setup_info_handler(app)
+setup_userinfo_handler(app)
 
 if __name__ == "__master__":
     app.run()
+
 
