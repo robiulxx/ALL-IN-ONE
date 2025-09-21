@@ -1,6 +1,5 @@
 import logging
 from datetime import datetime, timedelta
-from dateutil.relativedelta import relativedelta
 from pyrogram import filters, Client
 from pyrogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup
 from pyrogram.enums import ParseMode, ChatType, UserStatus
@@ -281,8 +280,9 @@ def setup_info_handler(app):
         ]
         await client.send_message(message.chat.id, START_MESSAGE, parse_mode=ParseMode.HTML, disable_web_page_preview=True, reply_markup=InlineKeyboardMarkup(buttons))
 
-app = Client("info_bot", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
+app = Client("userinfo_handler", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
 setup_info_handler(app)
 
-if __name__ == "__main__":
+if __name__ == "__master__":
     app.run()
+
