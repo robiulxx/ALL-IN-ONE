@@ -1,7 +1,6 @@
 import logging
 import requests
 from datetime import datetime, timedelta
-from dateutil.relativedelta import relativedelta
 from telebot.types import Message, InlineKeyboardButton, InlineKeyboardMarkup
 import html
 from io import BytesIO
@@ -22,7 +21,7 @@ DC_LOCATIONS = {
     15: "ICN, Seoul, South Korea, KR",
 }
 
-class AdvancedUserInfoHandler:
+class UserInfoHandler:
     def __init__(self):
         self.api_url = "https://api.telegram.org/bot{token}/getUserProfilePhotos"
     
@@ -178,7 +177,7 @@ class AdvancedUserInfoHandler:
             return PROFILE_ERROR_URL
 
 def register(bot, custom_command_handler, command_prefixes_list):
-    handler = AdvancedUserInfoHandler()
+    handler = UserInfo_Handler()
     
     def extract_identifier(message, target_type):
         """Extract identifier from message"""
@@ -334,19 +333,19 @@ def register(bot, custom_command_handler, command_prefixes_list):
     # Command Handlers (same as original structure)
     @custom_command_handler("usr")
     def handle_usr(message: Message):
-        fetch_advanced_info(bot, message, target_type="user")
+        fetch_user_info(bot, message, target_type="user")
 
     @custom_command_handler("bot")
     def handle_bot(message: Message):
-        fetch_advanced_info(bot, message, target_type="bot")
+        fetch_user_info(bot, message, target_type="bot")
 
     @custom_command_handler("grp")
     def handle_grp(message: Message):
-        fetch_advanced_info(bot, message, target_type="group")
+        fetch_user_info(bot, message, target_type="group")
 
     @custom_command_handler("cnnl")
     def handle_cnnl(message: Message):
-        fetch_advanced_info(bot, message, target_type="channel")
+        fetch_user_info(bot, message, target_type="channel")
 
     @custom_command_handler("info")
     def handle_info(message: Message):
@@ -358,20 +357,20 @@ def register(bot, custom_command_handler, command_prefixes_list):
         if username_or_type:
             uname = username_or_type.lower()
             if uname.endswith("bot"):
-                fetch_advanced_info(bot, message, target_type="bot")
+                fetch_user_info(bot, message, target_type="bot")
             elif "channel" in uname or uname.startswith("@c"):
-                fetch_advanced_info(bot, message, target_type="channel")
+                fetch_user_info(bot, message, target_type="channel")
             elif "group" in uname or uname.startswith("@g"):
-                fetch_advanced_info(bot, message, target_type="group")
+                fetch_user_info(bot, message, target_type="group")
             else: 
-                fetch_advanced_info(bot, message, target_type="user")
+                fetch_user_info(bot, message, target_type="user")
         elif message.reply_to_message:
             user = message.reply_to_message.from_user
             if user and user.is_bot:
-                fetch_advanced_info(bot, message, target_type="bot")
+                fetch_user_info(bot, message, target_type="bot")
             else:
-                fetch_advanced_info(bot, message, target_type="user")
+                fetch_user_info(bot, message, target_type="user")
         else: 
-            fetch_advanced_info(bot, message, target_type="user")
+            fetch_user_info(bot, message, target_type="user")
 
-    logger.info("✅ Advanced UserInfo Handler loaded successfully!")
+    logger.info("✅ UserInfo Handler loaded successfully!")
