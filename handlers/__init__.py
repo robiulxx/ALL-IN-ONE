@@ -22,6 +22,6 @@ from handlers.say_handler import register as say_register
 from handlers.spam_handler import register as spam_register
 from handlers.start_handler import register as start_register
 from handlers.translate_handler import register as translate_register
-from handlers.userinfo_handler import register as userinfo_register
+from handlers.userinfo_handler import register as info_register
 from handlers.wth_handler import register as wth_register
 from handlers.yt_handler import register as yt_register
