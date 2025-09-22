@@ -1,7 +1,6 @@
 import logging
 import requests
 from datetime import datetime, timedelta
-from dateutil.relativedelta import relativedelta
 from telebot.types import Message, InlineKeyboardButton, InlineKeyboardMarkup
 import html
 from io import BytesIO
