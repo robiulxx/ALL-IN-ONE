@@ -5,7 +5,7 @@ import os
 
 # আপনার Render ওয়েবসাইটের API URL টি এখানে বসান
 # এই URL টি os.environ.get ব্যবহার করে নিলে সবচেয়ে ভালো হয়
-WEBSITE_API_URL = os.environ.get("WEBSITE_API_URL", "https://your-render-app.onrender.com/api/info")
+WEBSITE_API_URL = os.environ.get("WEBSITE_API_URL", "https://info-ny2s.onrender.com/api/info")
 
 def get_info_from_api(query):
     """
