@@ -39,10 +39,10 @@ def format_reply(info):
             lines.append(f"↯ Verified: {'Yes' if info.get('is_verified') else 'No'}")
             lines.append(f"↯ Status: {info.get('status')}")
         
-        lines.append(f"↯ Account Created: {info.get('account_created')} (Very Good Accuracy)")
+        lines.append(f"↯ Account Created: {info.get('account_created')}")
         lines.append(f"↯ Age: {info.get('account_age')}")
     
-    elif entity_type in ['গ্রুপ', 'চ্যানেল']:
+    elif entity_type in ['Group', 'Channel']:
         header = f"✘「 {entity_type} Info 」"
         lines.append(header)
         lines.append(f"↯ Name: {info.get('title')}")
