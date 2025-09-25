@@ -4,8 +4,7 @@ import requests
 import os
 
 # আপনার Render ওয়েবসাইটের API URL টি এখানে বসান
-# এই URL টি os.environ.get ব্যবহার করে নিলে সবচেয়ে ভালো হয়
-WEBSITE_API_URL = os.environ.get("WEBSITE_API_URL", "https://info-ny2s.onrender.com/api/info")
+WEBSITE_API_URL = os.environ.get("WEBSITE_API_URL", "https://your-render-app.onrender.com/api/info")
 
 def get_info_from_api(query):
     """
@@ -13,50 +12,48 @@ def get_info_from_api(query):
     """
     try:
         response = requests.get(WEBSITE_API_URL, params={'query': query}, timeout=30)
-        response.raise_for_status()  # HTTP error থাকলে exception raise করবে
+        response.raise_for_status()
         return response.json()
     except requests.exceptions.RequestException as e:
-        return {'error': f"API connection error: {e}"}
+        return {'status': 'error', 'message': f"API connection error: {e}"}
 
 def format_reply(info):
     """
-    Formats the JSON data from the API into a readable string.
+    আপনার দেওয়া নতুন ফরম্যাট অনুযায়ী ডেটা সাজানো হচ্ছে।
     """
-    reply_text = ""
     entity_type = info.get('type')
+    lines = []
 
     if entity_type in ['User', 'Bot']:
-        reply_text = (
-            f"👤 <b>{info.get('type')} Information</b>\n\n"
-            f"<b>Name:</b> {info.get('first_name')} {info.get('last_name', '')}\n"
-            f"<b>User ID:</b> <code>{info.get('id')}</code>\n"
-            f"<b>Username:</b> @{info.get('username')}\n"
-            f"<b>Verified:</b> {'✅ Yes' if info.get('is_verified') else '❌ No'}\n"
-        )
-        if entity_type == 'Bot':
-            reply_text += f"<b>Can Join Groups:</b> {'✅ Yes' if info.get('can_join_groups') else '❌ No'}\n"
-        else:
-            reply_text += f"<b>Premium:</b> {'✅ Yes' if info.get('is_premium') else '❌ No'}\n"
-            reply_text += f"<b>Status:</b> {info.get('status')}\n"
+        header = f"✘「 {entity_type} Info 」"
+        lines.append(header)
+        lines.append(f"↯ Name: {info.get('first_name')} {info.get('last_name', '')}")
+        lines.append(f"↯ Username: @{info.get('username')}")
+        lines.append(f"↯ User ID: <code>{info.get('id')}</code>")
         
-        reply_text += (
-            f"<b>Account Created:</b> {info.get('account_created')}\n"
-            f"<b>Account Age:</b> {info.get('account_age')}\n"
-        )
+        if entity_type == 'Bot':
+            lines.append(f"↯ Verified: {'Yes' if info.get('is_verified') else 'No'}")
+            lines.append(f"↯ Can Join Groups: {'Yes' if info.get('can_join_groups') else 'No'}")
+        else: # User
+            lines.append(f"↯ Premium: {'Yes' if info.get('is_premium') else 'No'}")
+            lines.append(f"↯ Verified: {'Yes' if info.get('is_verified') else 'No'}")
+            lines.append(f"↯ Status: {info.get('status')}")
+        
+        lines.append(f"↯ Account Created: {info.get('account_created')} (Very Good Accuracy)")
+        lines.append(f"↯ Age: {info.get('account_age')}")
     
     elif entity_type in ['গ্রুপ', 'চ্যানেল']:
-        reply_text = (
-            f"🏢 <b>{info.get('type')} Information</b>\n\n"
-            f"<b>Name:</b> {info.get('title')}\n"
-            f"<b>ID:</b> <code>{info.get('id')}</code>\n"
-            f"<b>Username:</b> @{info.get('username')}\n"
-            f"<b>Type:</b> {info.get('type_detail')}\n"
-            f"<b>Status:</b> {info.get('status')}\n"
-            f"<b>Verified:</b> {'✅ Yes' if info.get('is_verified') else '❌ No'}\n"
-            f"<b>Members:</b> {info.get('participants_count'):,}\n"
-        )
-    
-    return reply_text
+        header = f"✘「 {entity_type} Info 」"
+        lines.append(header)
+        lines.append(f"↯ Name: {info.get('title')}")
+        lines.append(f"↯ ID: <code>{info.get('id')}</code>")
+        lines.append(f"↯ Username: @{info.get('username')}")
+        lines.append(f"↯ Type: {info.get('type_detail')}")
+        lines.append(f"↯ Status: {info.get('status')}")
+        lines.append(f"↯ Verified: {'Yes' if info.get('is_verified') else 'No'}")
+        lines.append(f"↯ Members: {info.get('participants_count'):,}")
+
+    return "\n".join(lines)
 
 def register(bot, custom_command_handler, COMMAND_PREFIXES):
     """
@@ -65,7 +62,6 @@ def register(bot, custom_command_handler, COMMAND_PREFIXES):
     @custom_command_handler('info', 'id')
     def info_command(message):
         query = ""
-        # ইনপুট নির্ধারণ করা হচ্ছে
         if message.reply_to_message:
             query = str(message.reply_to_message.from_user.id)
         else:
@@ -75,28 +71,27 @@ def register(bot, custom_command_handler, COMMAND_PREFIXES):
             else:
                 query = str(message.from_user.id)
         
-        # বটকে "Typing..." অ্যাকশন দেখাতে বলা হচ্ছে
         bot.send_chat_action(message.chat.id, 'typing')
-        
-        # API থেকে ডেটা আনা হচ্ছে
         response_data = get_info_from_api(query)
         
         if response_data.get('status') == 'error':
-            bot.reply_to(message, f"❌ <b>Error:</b> {response_data.get('message', 'Unknown error')}")
+            error_message = f"❌ <b>Error:</b> {response_data.get('message', 'Unknown error')}"
+            # ১ নম্বর পরিবর্তন: message.reply_to এর বদলে send_message ব্যবহার করা হয়েছে
+            bot.send_message(message.chat.id, error_message)
             return
         
         info = response_data.get('data', {})
         photo_url = info.get('photo_url')
+        # ৩ নম্বর পরিবর্তন: নতুন ফরম্যাট অনুযায়ী রিপ্লাই তৈরি
         reply_text = format_reply(info)
 
-        # ছবি থাকলে ছবির সাথে মেসেজ পাঠানো হবে, নাহলে শুধু টেক্সট
+        # ২ নম্বর পরিবর্তন: বটের ছবি দেখানোর জন্য লজিকটি ইউজার এবং বট উভয়ের জন্যই কাজ করার কথা
         if photo_url and photo_url != 'N/A':
-            # সম্পূর্ণ URL তৈরি করা হচ্ছে
             full_photo_url = f"https://{WEBSITE_API_URL.split('/')[2]}{photo_url}"
             try:
-                bot.send_photo(message.chat.id, photo=full_photo_url, caption=reply_text, reply_to_message_id=message.message_id)
+                # ১ নম্বর পরিবর্তন: reply_to_message_id ছাড়া ছবি পাঠানো হচ্ছে
+                bot.send_photo(message.chat.id, photo=full_photo_url, caption=reply_text)
             except Exception:
-                # ছবি পাঠাতে সমস্যা হলে শুধু টেক্সট পাঠানো হবে
-                bot.reply_to(message, reply_text)
+                bot.send_message(message.chat.id, reply_text)
         else:
-            bot.reply_to(message, reply_text)
+            bot.send_message(message.chat.id, reply_text)
