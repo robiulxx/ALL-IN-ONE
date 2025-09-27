@@ -99,7 +99,7 @@ def register(bot, custom_command_handler, command_prefixes_list):
             bot.edit_message_text(
                 chat_id=sent_msg.chat.id,
                 message_id=sent_msg.message_id,
-                text=f"<code>{card}</code>\n\n{status}\n\n👤 𝗥𝗲𝗾𝘂𝗲𝘀𝘁 𝗯𝘆: {username}  |  𝗝𝗼𝗶𝗻: @rszone24",
+                text=f"<code>{card}</code>\n\n{status}\n\n👤 𝗥𝗲𝗾𝘂𝗲𝘀𝘁 𝗯𝘆: {username}  |  𝗝𝗼𝗶𝗻: @rszoneBDx",
                 parse_mode="HTML"
             )
         except Exception as e:
@@ -135,7 +135,7 @@ def register(bot, custom_command_handler, command_prefixes_list):
             
             # Update message text after each card check
             current_progress = f"🔄 Checking card {i+1} of {len(cards)}...\n"
-            reply_text = current_progress + "\n".join(results) + f"\n\n👤 𝗥𝗲𝗾𝘂𝗲𝘀𝘁 𝗯𝘆: {username}  |  𝗝𝗼𝗶𝗻: @rszone24"
+            reply_text = current_progress + "\n".join(results) + f"\n\n👤 𝗥𝗲𝗾𝘂𝗲𝘀𝘁 𝗯𝘆: {username}  |  𝗝𝗼𝗶𝗻: @rszoneBDx"
 
             try:
                 bot.edit_message_text(
@@ -151,7 +151,7 @@ def register(bot, custom_command_handler, command_prefixes_list):
             if i < len(cards) - 1:
                 time.sleep(17)
         
-        final_reply_text = "\n".join(results) + f"\n\n👤 𝗥𝗲𝗾𝘂𝗲𝘀𝘁 𝗯𝘆: {username}  |  𝗝𝗼𝗶𝗻: @rszone24"
+        final_reply_text = "\n".join(results) + f"\n\n👤 𝗥𝗲𝗾𝘂𝗲𝘀𝘁 𝗯𝘆: {username}  |  𝗝𝗼𝗶𝗻: @rszoneBDx"
         
         if len(final_reply_text) > 4000:
             final_reply_text = final_reply_text[:3900] + "\n\n⚠️ Output trimmed..."
