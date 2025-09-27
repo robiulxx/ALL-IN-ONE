@@ -20,7 +20,7 @@ def register(bot, custom_command_handler, command_prefixes_list):
 
             "🔸 <b>বিশেষ দ্রষ্টব্য:</b> আপনি !, #, ', বা অন্য কোনো চিহ্ন দিয়েও কমান্ড চালাতে পারবেন।\n\n"
             "📢 <b>Stay With Us:</b>\n"
-            "<a href='https://t.me/rszone24'>𝗝𝗼𝗶𝗻: RS ZONE</a>"
+            "<a href='https://t.me/rszoneBDx'>𝗝𝗼𝗶𝗻: RS ZONE (BD)</a>"
         )
 
         bot.send_message(message.chat.id, welcome_text, parse_mode="HTML")
