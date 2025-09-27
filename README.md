@@ -382,7 +382,7 @@ OPENAI_API_KEY=your_openai_api_key_here
 
 ## 📞 Support & Links
 
-- **Telegram Channel**: [https://t.me/rszone24](https://t.me/rszone24)
+- **Telegram Channel**: [https://t.me/rszoneBDx](https://t.me/rszoneBDx)
 - **Issues**: Report bugs and request features
 - **Documentation**: This README file
 
