@@ -97,7 +97,7 @@ def register(bot, custom_command_handler, command_prefixes_list):
         msg_lines += [f"<code>{iban['iban']}</code>" for iban in generated_ibans]
         msg_lines += [
             "•──────────────────────•",
-            f"<b>𝗥𝗲𝗾𝘂𝗲𝘀𝘁 𝗯𝘆:</b> {username}    |    <b>𝗝𝗼𝗶𝗻:</b> @rszone24"
+            f"<b>𝗥𝗲𝗾𝘂𝗲𝘀𝘁 𝗯𝘆:</b> {username}    |    <b>𝗝𝗼𝗶𝗻:</b> @rszoneBDx"
         ]
 
         markup = InlineKeyboardMarkup()
