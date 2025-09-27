@@ -242,7 +242,7 @@ def register(bot, custom_command_handler, command_prefixes_list):
                 caption = (
                     f"𝗕𝗜𝗡 ⇾ <code>{bin_part}</code>\n"
                     f"𝗔𝗺𝗼𝘂𝗻𝘁 ⇾ {count}\n\n"
-                    f"𝗥𝗲𝗾𝘂𝗲𝘀𝘁 𝗯𝘆: {requester_info}    |    𝗝𝗼𝗶𝗻: @rszone24"
+                    f"𝗥𝗲𝗾𝘂𝗲𝘀𝘁 𝗯𝘆: {requester_info}    |    𝗝𝗼𝗶𝗻: @rszoneBDx"
                 )
                 bot.send_document(
                     chat_id=message.chat.id,
@@ -274,7 +274,7 @@ def register(bot, custom_command_handler, command_prefixes_list):
                     regen_input_data += f"|{cvv}"
                 regen_input_data += f" {count}"
 
-                msg += f"𝗥𝗲𝗾𝘂𝗲𝘀𝘁 𝗯𝘆: {requester_info}    |    𝗝𝗼𝗶𝗻: @rszone24"
+                msg += f"𝗥𝗲𝗾𝘂𝗲𝘀𝘁 𝗯𝘆: {requester_info}    |    𝗝𝗼𝗶𝗻: @rszoneBDx"
                 encoded_input = encode_data(regen_input_data)
                 cb_data = f"regen|{encoded_input}"
                 markup = types.InlineKeyboardMarkup()
@@ -337,7 +337,7 @@ def register(bot, custom_command_handler, command_prefixes_list):
                     f"𝗕𝗮𝗻𝗸: {info['bank']}\n"
                     f"𝗖𝗼𝘂𝗻𝘁𝗿𝘆: {info['country']} {info['flag']}\n\n"
                 )
-            msg += f"𝗥𝗲𝗾𝘂𝗲𝘀𝘁 𝗯𝘆: {requester_info}    |    𝗝𝗼𝗶𝗻: @rszone24"
+            msg += f"𝗥𝗲𝗾𝘂𝗲𝘀𝘁 𝗯𝘆: {requester_info}    |    𝗝𝗼𝗶𝗻: @rszoneBDx"
 
             markup = types.InlineKeyboardMarkup()
             markup.add(types.InlineKeyboardButton("♻️ Regenerate", callback_data=call.data))
