@@ -1,3 +1,5 @@
+from telegram import InlineKeyboardMarkup, InlineKeyboardButton
+
 def register(bot, custom_command_handler, command_prefixes_list): 
     @custom_command_handler("start")
     @custom_command_handler("arise")
@@ -23,4 +25,18 @@ def register(bot, custom_command_handler, command_prefixes_list):
             "<a href='https://t.me/rszoneBDx'>𝗝𝗼𝗶𝗻: RS ZONE (BD)</a>"
         )
 
-        bot.send_message(message.chat.id, welcome_text, parse_mode="HTML")
+        # ✅ Add inline buttons
+        buttons = [
+            [
+                InlineKeyboardButton("✅ Join Channel", url="https://t.me/rszoneBDx"),
+                InlineKeyboardButton("ℹ️ Help", callback_data="help_menu")
+            ]
+        ]
+        reply_markup = InlineKeyboardMarkup(buttons)
+
+        bot.send_message(
+            message.chat.id,
+            welcome_text,
+            parse_mode="HTML",
+            reply_markup=reply_markup
+        )
