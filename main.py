@@ -28,6 +28,7 @@ from handlers import (
     movie_handler,
     pfp_handler,
     reveal_handler,
+    sessiongen_handler,
     say_handler,
     spam_handler,
     start_handler,
@@ -117,6 +118,7 @@ register_handler(imagine_handler, "Imagine")
 register_handler(movie_handler, "movie")
 register_handler(pfp_handler, "pfp")
 register_handler(reveal_handler, "Reveal")
+register_handler(sessiongen_handler, "SessionGen")
 register_handler(say_handler, "Say")
 register_handler(spam_handler, "spam")
 register_handler(start_handler, "Start")
