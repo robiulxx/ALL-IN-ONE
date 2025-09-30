@@ -18,7 +18,6 @@ from handlers.imagine_handler import register as imagine_register
 from handlers.movie_handler import register as movie_register
 from handlers.pfp_handler import register as pfp_register
 from handlers.reveal_handler import register as reveal_register
-from handlers.sessiongen_handler import register as sessiongen_register
 from handlers.say_handler import register as say_register
 from handlers.spam_handler import register as spam_register
 from handlers.start_handler import register as start_register
