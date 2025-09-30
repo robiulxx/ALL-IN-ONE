@@ -16,3 +16,4 @@ requests
 tgcrypto
 yt-dlp
 python-dateutil
+telethon
