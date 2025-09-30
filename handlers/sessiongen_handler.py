@@ -26,22 +26,10 @@ def cleanup_user(user_id):
 
 def register(bot, custom_command_handler, COMMAND_PREFIXES):
     # ----------------------------
-    # /start command
+    # /sessiongen command
     # ----------------------------
-    @custom_command_handler("start")
-    def start_handler(message):
-        bot.send_message(
-            message.chat.id,
-            "Hello! I am a Telegram session generator bot.\n\n"
-            "Use `/generate` with your API_ID, API_HASH, and phone number to create a session.\n\n"
-            "**Note:** I do not store your data."
-        )
-
-    # ----------------------------
-    # /generate command
-    # ----------------------------
-    @custom_command_handler("generate")
-    def generate_handler(message):
+    @custom_command_handler("sessiongen")
+    def sessiongen_handler(message):
         user_id = message.from_user.id
         cleanup_user(user_id)
 
