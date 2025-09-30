@@ -28,7 +28,6 @@ from handlers import (
     movie_handler,
     pfp_handler,
     reveal_handler,
-    sessiongen_handler,
     say_handler,
     spam_handler,
     start_handler,
