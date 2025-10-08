@@ -60,7 +60,7 @@ def register(bot, custom_command_handler, command_prefixes_list):
                 f"𝗖𝘂𝗿𝗿𝗲𝗻𝗰𝘆: <code>{address.get('currency', 'N/A')}</code>\n"
                 f"𝗧𝗶𝗺𝗲𝘇𝗼𝗻𝗲: <code>{address.get('time_zone', 'N/A')}</code> ({address.get('description', 'N/A')})\n"
                 f"•{'━'*10}•\n"
-                f"👤 𝗥𝗲𝗤𝘂𝗲𝘀𝘁 𝗯𝘆: {username}  |  𝗝𝗼𝗶𝗻: @rszone24"
+                f"👤 𝗥𝗲𝗤𝘂𝗲𝘀𝘁 𝗯𝘆: {username}  |  𝗝𝗼𝗶𝗻: @rszoneBDx"
             )
             bot.send_message(message.chat.id, msg, parse_mode="HTML")
 
