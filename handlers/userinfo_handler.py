@@ -62,34 +62,51 @@ def register(bot, custom_command_handler, COMMAND_PREFIXES):
     @custom_command_handler('info', 'id')
     def info_command(message):
         query = ""
+        use_numeric_id = False
+        
         if message.reply_to_message:
-            query = str(message.reply_to_message.from_user.id)
+            # রিপ্লাই করা ইউজারের username ব্যবহার করুন
+            if message.reply_to_message.from_user.username:
+                query = "@" + message.reply_to_message.from_user.username
+            else:
+                # username না থাকলে numeric ID ব্যবহার করুন
+                query = str(message.reply_to_message.from_user.id)
+                use_numeric_id = True
+                bot.send_message(message.chat.id, "⚠️ এই ইউজারের username নেই। numeric ID দিয়ে চেষ্টা করা হচ্ছে...")
         else:
             parts = message.text.split(maxsplit=1)
             if len(parts) > 1:
                 query = parts[1]
+                # ইউজারনেম ফরম্যাট নিশ্চিত করুন
+                if not query.startswith('@'):
+                    query = '@' + query
             else:
-                query = str(message.from_user.id)
+                # নিজের username ব্যবহার করুন
+                if message.from_user.username:
+                    query = '@' + message.from_user.username
+                else:
+                    # username না থাকলে numeric ID ব্যবহার করুন
+                    query = str(message.from_user.id)
+                    use_numeric_id = True
+                    bot.send_message(message.chat.id, "⚠️ আপনার username নেই। numeric ID দিয়ে চেষ্টা করা হচ্ছে...")
         
         bot.send_chat_action(message.chat.id, 'typing')
         response_data = get_info_from_api(query)
         
         if response_data.get('status') == 'error':
             error_message = f"❌ <b>Error:</b> {response_data.get('message', 'Unknown error')}"
-            # ১ নম্বর পরিবর্তন: message.reply_to এর বদলে send_message ব্যবহার করা হয়েছে
+            if use_numeric_id:
+                error_message += "\n\n💡 <b>Tip:</b> numeric ID দিয়ে সার্চ কাজ না করলে username (@username) দিয়ে চেষ্টা করুন।"
             bot.send_message(message.chat.id, error_message)
             return
         
         info = response_data.get('data', {})
         photo_url = info.get('photo_url')
-        # ৩ নম্বর পরিবর্তন: নতুন ফরম্যাট অনুযায়ী রিপ্লাই তৈরি
         reply_text = format_reply(info)
 
-        # ২ নম্বর পরিবর্তন: বটের ছবি দেখানোর জন্য লজিকটি ইউজার এবং বট উভয়ের জন্যই কাজ করার কথা
         if photo_url and photo_url != 'N/A':
             full_photo_url = f"https://{WEBSITE_API_URL.split('/')[2]}{photo_url}"
             try:
-                # ১ নম্বর পরিবর্তন: reply_to_message_id ছাড়া ছবি পাঠানো হচ্ছে
                 bot.send_photo(message.chat.id, photo=full_photo_url, caption=reply_text)
             except Exception:
                 bot.send_message(message.chat.id, reply_text)
